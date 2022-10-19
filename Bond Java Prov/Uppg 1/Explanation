@@ -1,0 +1,32 @@
+<script>
+var nummerArray = [];
+function randomization(randomizedNummer)
+{  
+//Skapar variabeln loops för att göra så att den loopar ett antal gånger, gjorde inte detta innuti for loopen eftersom att det inte fungerade för någon anledning
+    var loops = 0;
+    for(loops; loops < 10; loops++){
+    //Definerar saker, sammaNummer är -1 på grund av att indexOf() retunerar -1 om den inte hittade en value. Jag kollar senare om randomized är samma som -1 för att kolla om det blev samma nummer.
+        sammaNummer = -1;
+        minstaTal = 0;
+        störstaTal = 99;
+    //Generera ett random nummer och roundar den till heltal
+        randomizedNummer = Math.round(Math.random(minstaTal, störstaTal) * 100);
+    //if sats, om randomized nummret inte är samma så triggar den som true eftersom att sammaNummer inte hittade samma value, vilket blir -1.
+        if(nummerArray.indexOf(randomizedNummer) == sammaNummer) {
+            nummerArray.push(randomizedNummer);
+        }
+    //Om nummret blev samma så visar den hur många gånger den blev samma, (finns ett litet nummer brevid, därför finns det en liten pil). Den tar bort 1 från loop eftersom att den inte fick ett nytt nummer och måste då göra allt på samma varv.
+        else {
+            console.log("<-- Antal gånger det blev samma nummer");
+            loops = (loops - 1);
+        }
+    }
+}
+randomization();
+console.log(nummerArray);
+//Funktion för när alla nummer ska sorteras med .sort, fast man kan inte göra det till nummer, så jag skapar en funktion som kollar vilken av det förra eller the currect nummer är större genom att göra a -b för att se om det blir positivt eller negativt.
+nummerArray.sort(function(a, b) {
+    return a - b;
+});
+console.log(nummerArray)
+</script>

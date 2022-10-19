@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <form id="form"> <!--Skapar en form, och sedan en label åt varenda input-->
+        <label>Username:</label>
+        <input type="text" id="uname"><br><br>
+        <label>Password:</label>
+        <input type="password" id="pass"><br><br>
+        <label>Confirm Password:</label>
+        <input type="password" id="cpass"><br><br>
+        <label>Email Adress:</label>
+        <input type="text" id="email"><br><br>
+        <label>I have read and agreed to the terms of service:</label><br>
+        <input type="checkbox" id="agree"><br><br>
+        <input type="submit" value="Sign Up" onclick="validate()"> <!--Skapar submit knapp som kör validate funktionen när den klickas-->
+    </form>
+<script src="script.js"></script> <!--länkar till js script.-->
+</body>
+</html>
+
+<script>
+//Skapar validate funktionen.
+    function validate(){ 
+//Skapar alla variabler
+    var password1 = document.getElementById("pass").value;
+    var password2 = document.getElementById("cpass").value;
+    var email = document.getElementById("email").value;
+    var form = document.getElementById("form");
+    var at = "@";
+
+//Kollar om första password är samma som confirm password
+    if(password1 != password2) {
+        alert("Your passwords did not match");
+    }
+//Kollar om första password input är mindre än 6, i så fall så kör den en alert
+    if (password1.length < 6) {
+        alert("Password is too short");
+    }
+//Kollar i fall att email input har ett @ i sin string, om inte kör den en alert
+    if (email.includes(at) == false) {
+        alert("Not a valid email adress!");
+    }
+//Kollar om agree checkboxen är checkad, om inte kör den en alert
+    if (document.getElementById("agree").checked == false) {
+        alert("You need to agree to the terms of service first!");
+    }
+//Om alla vilkor i följande if sats är sanna (allt i formen är korrekt), så tar den dig till tack.html, vilket är webbsidan som tackar dig
+    if (password1 == password2 && password1.length >= 6 && document.getElementById("agree").checked == true && email.includes(at)) {
+        window.location.replace("tack.html");
+    }
+
+//Denna bit av kod gör så att sidan inte reloadar sidan varje gång du klickar submit.
+//Skapar en funktion som stoppar submit knappen att automatiskt ladda om sidan.
+function handleForm(event) { event.preventDefault(); } 
+form.addEventListener("submit", handleForm);
+}
+</script>
